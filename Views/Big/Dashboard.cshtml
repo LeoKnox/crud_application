@@ -1,0 +1,48 @@
+<h2>Dojo Activity Center</h2>
+<p>Welcome @ViewBag.user.FirstName</p>
+<a href="/logout">Log Off</a>
+<table>
+    <tr>
+        <th>Activity</th>
+        <th>Date and Time</th>
+        <th>Duration</th>
+        <th># of Participants</th>
+        <th>Actions</th>
+    </tr>
+    @foreach (var a in ViewBag.act)
+    {
+    <tr>
+        <td><a href="/oneact/@a.ActivityId">@a.MyActivity</a></td>
+        <td>@a.Date.ToString("MM/dd") - @a.Time.ToString("hh:mm tt")</td>
+        <td>@a.Duration @a.Length</td>
+        <td>@a.Attendee.Count</td>
+        <td>
+            @if (@ViewBag.user.UserId == @a.Coordinator)
+            { 
+                <a href="/deleteme/@a.ActivityId">Delete</a>
+            }
+            else
+            {
+                @if (a.Attendee.Count == 0)
+                {
+                    <a href="/joinact/@a.ActivityId">Join</a>
+                }
+                else {
+                    @foreach (var b in a.Attendee){
+                        @if (b.UserId == @ViewBag.user.UserId)
+                        {
+                            <a href="/leaveact/@a.ActivityId">Leave</a>
+                            break;
+                        }
+                        else
+                        {
+                            <a href="/joinact/@a.ActivityId">Join</a>
+                        }
+                    }
+                }
+            }
+        </td>
+    </tr>
+    }
+</table>
+<a href="CreateActivity">Add New Activity</a>

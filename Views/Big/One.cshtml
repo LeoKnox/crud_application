@@ -1,0 +1,35 @@
+<h2>Dojo Activity Center</h2>
+<a href="/Dashboard">Home</a>
+<a href="/logout">Log off</a><br>
+
+@if (@Model.Attendee.Count == 0) {
+    <a href="/joinact/@Model.ActivityId">Join</a>
+}
+else {
+@foreach (var y in @Model.Attendee) {
+@if (@y.UserId == @ViewBag.co.UserId)
+{
+    <a href="/leaveact/@Model.ActivityId">Leave</a>
+    break;
+}
+else
+{
+    <a href="/joinact/@Model.ActivityId">Join</a>
+}
+}
+}
+
+<h3>Event Coordinator: @ViewBag.co.FirstName @ViewBag.co.LastName</h3>
+
+<h2>@Model.MyActivity</h2>
+
+<h3>Description</h3>
+<p>@Model.Description</p>
+
+<h3>Participants</h3>
+<ul>
+    @foreach (var g in @Model.Attendee)
+    {
+        <li>@g.User.FirstName @g.User.LastName</li>
+    }
+</ul>

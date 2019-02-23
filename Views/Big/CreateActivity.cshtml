@@ -1,0 +1,29 @@
+@model Activities
+<a href="/Dashboard">Home</a>
+<a href="/logout">Log off</a><br>
+
+<h2>Create an Activity!</h2>
+<a href="/logout">Log Off</a>
+<form asp-action="NewActivity" asp-controller="Big" method="Post">
+    <span asp-validation-for="MyActivity"></span>
+    <label asp-for="MyActivity"></label>
+    <input asp-for="MyActivity"><br>
+    <span asp-validation-for="Time"></span>
+    <label asp-for="Time"></label>
+    <input asp-for="Time" type="time"><br>
+    <span asp-validation-for="Date"></span>
+    <label asp-for="Date"></label>
+    <input asp-for="Date" type="date"><br>
+    <span asp-validation-for="Duration"></span>
+    <label asp-for="Duration"></label>
+    <input asp-for="Duration">
+    <select asp-for="Length">
+        <option>hours</option>
+        <option>days</option>
+        <option>minutes</option>
+    </select><br>
+    <span asp-validation-for="Description"></span>
+    <label asp-for="Description"></label>
+    <input asp-for="Description"><br>
+    <button>Create Activity</button>
+</form>
